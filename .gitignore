@@ -1,0 +1,48 @@
+# AI & Agent configurations
+.agents/
+.gemini/
+skills-lock.json
+DESIGN.md
+DOC.md
+PRODUCT.md
+
+# Python virtual envs & caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+.pytest_cache/
+
+# Node & Build artifacts
+node_modules/
+dist/
+*.local
+.eslintcache
+
+# Logs & Downloads
+*.log
+backend/app/temp/
+
+# Secrets & Local Configurations
+.env
+.env.*
+*.env
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# Databases & Local Storage
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE / System Configurations
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
