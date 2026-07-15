@@ -1,6 +1,12 @@
 # AI & Agent configurations
 .agents/
 .gemini/
+.claude/
+.codex/
+.impeccable/
+.kiro/
+.pi/
+.qoder/
 skills-lock.json
 DESIGN.md
 DOC.md
@@ -27,6 +33,7 @@ dist/
 # Logs & Downloads
 *.log
 backend/app/temp/
+backend/temp_downloads/
 
 # Secrets & Local Configurations
 .env
