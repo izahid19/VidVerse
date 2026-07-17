@@ -13,6 +13,7 @@ const Youtube        = lazy(() => import("@/pages/Youtube"));
 const YoutubeShorts  = lazy(() => import("@/pages/YoutubeShorts"));
 const Instagram      = lazy(() => import("@/pages/Instagram"));
 const Twitter        = lazy(() => import("@/pages/Twitter"));
+const Transcript     = lazy(() => import("@/pages/Transcript"));
 const NotFound       = lazy(() => import("@/pages/NotFound"));
 
 // Minimal fallback shown while a page chunk loads
@@ -32,6 +33,7 @@ export default function AppRoutes() {
           <Route path="/youtube-shorts" element={<YoutubeShorts />} />
           <Route path="/instagram"      element={<Instagram />} />
           <Route path="/twitter"        element={<Twitter />} />
+          <Route path="/transcript"     element={<Transcript />} />
           <Route path="*"               element={<NotFound />} />
         </Route>
       </Routes>

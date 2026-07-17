@@ -16,6 +16,7 @@ from flask_cors import CORS
 from app.errors import register_error_handlers
 from app.routes.download import download_bp
 from app.routes.info import info_bp
+from app.routes.transcript import transcript_bp
 
 
 def _setup_logging(app: Flask) -> None:
@@ -84,6 +85,7 @@ def create_app(env: str | None = None) -> Flask:
     # Blueprints
     app.register_blueprint(info_bp)
     app.register_blueprint(download_bp)
+    app.register_blueprint(transcript_bp)
 
     # Error handlers
     register_error_handlers(app)
