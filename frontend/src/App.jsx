@@ -21,7 +21,7 @@ export default function App() {
 
       {/* Global toast notification portal */}
       <ToastContainer
-        position="bottom-right"
+        position="top-right"
         autoClose={4000}
         hideProgressBar={false}
         newestOnTop
@@ -30,14 +30,7 @@ export default function App() {
         draggable
         pauseOnHover
         theme="dark"
-        toastStyle={{
-          background: "rgba(15,15,18,0.95)",
-          border: "1px solid rgba(255,255,255,0.1)",
-          backdropFilter: "blur(12px)",
-          color: "#fff",
-          borderRadius: "12px",
-          fontSize: "14px",
-        }}
+        style={{ zIndex: 999999 }}
       />
     </>
   );
