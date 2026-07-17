@@ -4,7 +4,6 @@
  * Wraps every page with the sticky header, footer, and route outlet.
  */
 
-import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";

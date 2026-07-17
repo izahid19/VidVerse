@@ -1,4 +1,3 @@
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 import TranscriptForm from "@/components/TranscriptForm";
 import { FileText } from "@/reusable/Icons";

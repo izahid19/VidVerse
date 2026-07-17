@@ -1,4 +1,3 @@
-import React from "react";
 
 // Zero-dependency custom SVG icons matching lucide design
 export const Youtube = ({ className, ...props }) => (
