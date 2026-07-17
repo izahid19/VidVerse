@@ -47,6 +47,19 @@ export const toastMessages = {
      */
     downloadComplete: () =>
       toast.success("Download complete! Your file is ready.", successOptions),
+
+    /**
+     * Fired when transcript info is successfully fetched and languages are listed.
+     * @param {string} title - The video title.
+     */
+    transcriptLocated: (title) =>
+      toast.success(`Transcript found: ${title}`, successOptions),
+
+    /**
+     * Fired when a transcript .txt file has been successfully downloaded.
+     */
+    transcriptDownloaded: () =>
+      toast.success("Transcript downloaded successfully!", successOptions),
   },
 
   error: {
@@ -93,5 +106,18 @@ export const toastMessages = {
      */
     transferFailed: (message) =>
       toast.error(`Transfer Failed: ${message || "An unexpected error occurred."}`, errorOptions),
+
+    /**
+     * Fired when a video has no captions available for transcript extraction.
+     */
+    noTranscriptAvailable: () =>
+      toast.error("No captions available — this video has no subtitles or auto-generated captions.", errorOptions),
+
+    /**
+     * Fired when the transcript extraction or download fails.
+     * @param {string} message - The error detail from the API.
+     */
+    transcriptExtractionFailed: (message) =>
+      toast.error(`Transcript Error: ${message || "Failed to extract transcript."}`, errorOptions),
   },
 };

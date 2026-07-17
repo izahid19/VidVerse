@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Github } from "@/reusable/Icons";
+import { Github, FileText } from "@/reusable/Icons";
 
 /**
  * Navbar — site header navigation.
@@ -21,6 +21,18 @@ export default function Navbar() {
           {location.pathname !== "/" && (
             <Link to="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
           )}
+          <Link
+            to="/transcript"
+            className={`flex items-center gap-1.5 transition-colors ${
+              location.pathname === "/transcript"
+                ? "text-violet-400"
+                : "text-white/60 hover:text-white"
+            }`}
+            title="Transcript Extractor"
+          >
+            <FileText className="w-4 h-4" />
+            <span>Transcript</span>
+          </Link>
           <a
             href="https://github.com"
             target="_blank"

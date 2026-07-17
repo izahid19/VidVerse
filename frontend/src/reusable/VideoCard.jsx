@@ -2,26 +2,30 @@
  * VideoCard — reusable component displayed after a successful video info fetch.
  *
  * Uses:
- *  - crud/youtube.crud.js  for all network calls
+ *  - crud/youtube.crud.js  for download network calls
  *  - services/toastMessages.js  for all user-facing notifications
  *  - reusable/Icons.jsx  for SVG icons
  */
 
 import React, { useState, useEffect, useRef } from "react";
-import { Download, Play, Eye, User, CheckCircle2, Loader2, Music, Film, ImageIcon } from "@/reusable/Icons";
+import { Download, Play, Eye, User, CheckCircle2, Loader2, Music, Film, ImageIcon, FileText } from "@/reusable/Icons";
 import { Progress } from "@/components/ui/progress";
 import { startDownload, pollDownloadStatus, getFileUrl } from "@/crud/youtube.crud";
 import { toastMessages } from "@/services/toastMessages";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
 const AUDIO_QUALITIES = ["320k", "192k", "128k"];
 
+function isYouTubeUrl(url) {
+  return /youtube\.com|youtu\.be/.test(url || "");
+}
+
 export default function VideoCard({ videoInfo }) {
   const [downloading, setDownloading] = useState(false);
   const [downloadComplete, setDownloadComplete] = useState(false);
 
-  // "video" | "mp3"
   const [formatMode, setFormatMode] = useState("video");
 
   const [selectedQuality, setSelectedQuality] = useState(() => {
@@ -33,6 +37,7 @@ export default function VideoCard({ videoInfo }) {
   const [selectedAudioQuality, setSelectedAudioQuality] = useState("192k");
   const [stats, setStats] = useState(null);
 
+  const navigate = useNavigate();
   const pollingRef = useRef(null);
   const cardRef = useRef(null);
 
@@ -47,12 +52,13 @@ export default function VideoCard({ videoInfo }) {
     return () => { if (pollingRef.current) clearInterval(pollingRef.current); };
   }, []);
 
-  // Reset completion badge when user switches format/quality
   useEffect(() => {
     setDownloadComplete(false);
   }, [formatMode, selectedQuality, selectedAudioQuality]);
 
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
+  // Download handlers
+  // ---------------------------------------------------------------------------
   const handleDownload = async () => {
     setDownloading(true);
     setDownloadComplete(false);
@@ -70,7 +76,6 @@ export default function VideoCard({ videoInfo }) {
         try {
           const statusData = await pollDownloadStatus(downloadId);
           if (!statusData) return;
-
           setStats(statusData);
 
           if (statusData.status === "completed") {
@@ -96,7 +101,7 @@ export default function VideoCard({ videoInfo }) {
     }
   };
 
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   const standardHeights = ["144p", "240p", "360p", "480p", "720p", "1080p", "1440p", "2160p"];
   const displayQualities = videoInfo.availableQualities
     .filter(q => standardHeights.includes(q))
@@ -106,6 +111,9 @@ export default function VideoCard({ videoInfo }) {
   const extractLabel = isMP3
     ? `Extract MP3 [${selectedAudioQuality}]`
     : `Extract [${selectedQuality}]`;
+
+  const showTranscriptButton = isYouTubeUrl(videoInfo.url);
+  const transcriptUrl = `/transcript?url=${encodeURIComponent(videoInfo.url)}`;
 
   return (
     <div ref={cardRef} className="w-full">
@@ -168,7 +176,6 @@ export default function VideoCard({ videoInfo }) {
 
             {/* Format Toggle + Quality Pills */}
             <div className="space-y-4">
-              {/* Video / MP3 toggle */}
               <div className="flex items-center gap-2 p-1 rounded-xl bg-white/5 border border-white/10 w-fit">
                 <button disabled={downloading} onClick={() => setFormatMode("video")}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
@@ -188,7 +195,6 @@ export default function VideoCard({ videoInfo }) {
                 </button>
               </div>
 
-              {/* Video quality pills */}
               {!isMP3 && (
                 <div className="space-y-2">
                   <span className="text-xs font-medium text-white/50 uppercase tracking-wider">Format Quality</span>
@@ -207,7 +213,6 @@ export default function VideoCard({ videoInfo }) {
                 </div>
               )}
 
-              {/* MP3 bitrate pills */}
               {isMP3 && (
                 <div className="space-y-2">
                   <span className="text-xs font-medium text-white/50 uppercase tracking-wider">Audio Bitrate</span>
@@ -261,6 +266,22 @@ export default function VideoCard({ videoInfo }) {
                 </button>
               )}
             </div>
+
+            {/* ------------------------------------------------------------ */}
+            {/* Transcript Navigation Button (YouTube only)                  */}
+            {/* ------------------------------------------------------------ */}
+            {showTranscriptButton && (
+              <div className="border-t border-white/[0.08] pt-4">
+                <button
+                  onClick={() => navigate(transcriptUrl)}
+                  className="w-full flex items-center justify-center gap-2.5 h-12 rounded-xl border border-violet-500/30 bg-violet-500/10 hover:bg-violet-500/20 hover:border-violet-500/50 text-violet-300 hover:text-violet-200 font-semibold text-sm transition-all duration-300 transform hover:-translate-y-0.5 shadow-[0_0_20px_rgba(109,40,217,0.1)] hover:shadow-[0_0_28px_rgba(109,40,217,0.25)]"
+                >
+                  <FileText className="w-4 h-4" />
+                  Get Transcript
+                </button>
+              </div>
+            )}
+
           </div>
         </div>
       </div>

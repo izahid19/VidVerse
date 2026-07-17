@@ -34,4 +34,9 @@ export const SEO_CONFIG = {
     description: "The page you are looking for does not exist on VidVerse.",
     keywords: "404, page not found, error, vidverse",
   },
+  transcript: {
+    title: "YouTube Transcript Extractor - VidVerse",
+    description: "Extract clean, readable transcripts from any YouTube video. Download auto-generated and manual captions in 60+ languages as a plain text file.",
+    keywords: "youtube transcript, extract captions, youtube subtitles download, video to text, transcript extractor, youtube captions",
+  },
 };
