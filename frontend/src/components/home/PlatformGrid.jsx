@@ -76,7 +76,7 @@ export default function PlatformGrid() {
 
   return (
     <div ref={container} className="w-full max-w-6xl mx-auto px-6 py-12 z-10 relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {platforms.map((platform) => (
           <Link
             key={platform.id}
