@@ -30,7 +30,6 @@ export default function Navbar() {
             title="Transcript Extractor"
           >
             <FileText className="w-4 h-4" />
-            <span>Transcript</span>
           </Link>
           <a
             href="https://github.com"
