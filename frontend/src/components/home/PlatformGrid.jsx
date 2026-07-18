@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Youtube, Instagram, Twitter } from "@/reusable/Icons";
+import { Youtube, Instagram, Twitter, Facebook } from "@/reusable/Icons";
 
 const platforms = [
   {
@@ -40,6 +40,15 @@ const platforms = [
     shortcut: "4",
     icon: <Twitter className="w-8 h-8 text-white/80 group-hover:scale-110 transition-transform duration-500" />,
     color: "white"
+  },
+  {
+    id: "facebook",
+    name: "Facebook",
+    path: "/facebook",
+    desc: "Videos, Reels & Watch.",
+    shortcut: "5",
+    icon: <Facebook className="w-8 h-8 group-hover:scale-110 transition-transform duration-500" style={{ color: "#1877F2" }} />,
+    color: "blue"
   }
 ];
 
@@ -67,7 +76,7 @@ export default function PlatformGrid() {
 
   return (
     <div ref={container} className="w-full max-w-6xl mx-auto px-6 py-12 z-10 relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         {platforms.map((platform) => (
           <Link
             key={platform.id}

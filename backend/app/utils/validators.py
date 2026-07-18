@@ -52,3 +52,25 @@ def validate_twitter_url(url: str | None) -> bool:
         r"(?P<id>\d+)"
     )
     return bool(re.search(pattern, url))
+
+
+def validate_facebook_url(url: str | None) -> bool:
+    """
+    Return True if *url* looks like a valid Facebook video link.
+    Accepts:
+      - facebook.com/watch?v=...
+      - facebook.com/<page>/videos/...
+      - facebook.com/reel/...
+      - facebook.com/share/v/...
+      - fb.watch/... short links
+    """
+    if not url:
+        return False
+    patterns = [
+        r"(?:https?://)?(?:www\.|m\.)?facebook\.com/watch(?:\?v=|\?ref=)[\w]+",
+        r"(?:https?://)?(?:www\.|m\.)?facebook\.com/[\w.]+/videos/[\w/]+",
+        r"(?:https?://)?(?:www\.|m\.)?facebook\.com/reel/[\w]+",
+        r"(?:https?://)?(?:www\.|m\.)?facebook\.com/share/[rv]/[\w]+",
+        r"(?:https?://)?fb\.watch/[\w]+",
+    ]
+    return any(bool(re.search(p, url)) for p in patterns)

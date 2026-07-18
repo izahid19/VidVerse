@@ -19,7 +19,7 @@ from flask import Blueprint, current_app, jsonify, request, send_file
 
 from app.core.store import progress_lock, progress_store
 from app.services.downloader import download_worker
-from app.utils.validators import validate_youtube_url, validate_instagram_url, validate_twitter_url
+from app.utils.validators import validate_youtube_url, validate_instagram_url, validate_twitter_url, validate_facebook_url
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +41,7 @@ def start_download():
     if not url:
         return jsonify({"success": False, "error": {"code": 400, "message": "URL is required"}}), 400
 
-    if not validate_youtube_url(url) and not validate_instagram_url(url) and not validate_twitter_url(url):
+    if not validate_youtube_url(url) and not validate_instagram_url(url) and not validate_twitter_url(url) and not validate_facebook_url(url):
         return jsonify({"success": False, "error": {"code": 400, "message": "Invalid URL — pattern not recognised"}}), 400
 
     temp_dir: str = current_app.config["TEMP_DIR"]

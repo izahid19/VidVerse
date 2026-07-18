@@ -79,3 +79,20 @@ export function validateTwitterUrl(url) {
   const pattern = /^(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/[\w-]+\/status\/\d+/i;
   return pattern.test(url.trim());
 }
+
+/**
+ * Validates that the URL is a Facebook video, reel, or watch link.
+ * @param {string} url
+ * @returns {boolean}
+ */
+export function validateFacebookUrl(url) {
+  if (!url) return false;
+  const patterns = [
+    /(?:https?:\/\/)?(?:www\.|m\.)?facebook\.com\/watch(?:\?v=|\?ref=)[\w]+/i,
+    /(?:https?:\/\/)?(?:www\.|m\.)?facebook\.com\/[\w.]+\/videos\/[\w/]+/i,
+    /(?:https?:\/\/)?(?:www\.|m\.)?facebook\.com\/reel\/[\w]+/i,
+    /(?:https?:\/\/)?(?:www\.|m\.)?facebook\.com\/share\/[rv]\/[\w]+/i,
+    /(?:https?:\/\/)?fb\.watch\/[\w]+/i,
+  ];
+  return patterns.some((p) => p.test(url.trim()));
+}

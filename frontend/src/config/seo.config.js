@@ -39,4 +39,9 @@ export const SEO_CONFIG = {
     description: "Extract clean, readable transcripts from any YouTube video. Download auto-generated and manual captions in 60+ languages as a plain text file.",
     keywords: "youtube transcript, extract captions, youtube subtitles download, video to text, transcript extractor, youtube captions",
   },
+  facebook: {
+    title: "Facebook Video Downloader - VidVerse",
+    description: "Download Facebook videos, Reels, and Watch videos in high quality instantly. Paste any Facebook video link and save it directly.",
+    keywords: "facebook video downloader, download facebook reel, save facebook video, fb video download, facebook watch download",
+  },
 };

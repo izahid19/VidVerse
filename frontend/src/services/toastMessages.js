@@ -94,6 +94,12 @@ export const toastMessages = {
       toast.error("Invalid Twitter URL — paste a twitter.com/x.com status link.", errorOptions),
 
     /**
+     * Fired when the user inputs an invalid Facebook URL.
+     */
+    invalidFacebookUrl: () =>
+      toast.error("Invalid Facebook URL — paste a facebook.com/watch, /reel, or /videos/... link.", errorOptions),
+
+    /**
      * Fired when the /api/info fetch fails.
      * @param {string} message - The error detail from the API.
      */

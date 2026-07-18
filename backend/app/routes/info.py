@@ -11,7 +11,7 @@ import logging
 from flask import Blueprint, jsonify, request
 
 from app.services.extractor import get_video_info
-from app.utils.validators import validate_youtube_url, validate_instagram_url, validate_twitter_url
+from app.utils.validators import validate_youtube_url, validate_instagram_url, validate_twitter_url, validate_facebook_url
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ def get_info():
     if not url:
         return jsonify({"success": False, "error": {"code": 400, "message": "URL is required"}}), 400
 
-    if not validate_youtube_url(url) and not validate_instagram_url(url) and not validate_twitter_url(url):
+    if not validate_youtube_url(url) and not validate_instagram_url(url) and not validate_twitter_url(url) and not validate_facebook_url(url):
         return jsonify({"success": False, "error": {"code": 400, "message": "Invalid URL — pattern not recognised"}}), 400
 
     try:
